@@ -43,7 +43,7 @@ function updateReviewCountdown(){
 }
 
 const groups=[['장로 부부','정상문, 김길옥'],['클럽맨','시무장로들'],['클럽 친구 1','문지현'],['클럽 친구 2','장영주'],['클럽 DJ','허효욱'],['카메오 · 떡장수','이진일'],['40대 남자 부인 · 목소리','박선경'],['주일학교 학생들','김리하, 이주원, 임현'],['중고등부 학생들','김아미, 전재순, 주영숙'],['안내위원','김미옥'],['교인들','권형준, 김석현, 정영화'],['담임목사','이대근']];
-const staff=[['음악팀','박인선'],['안무팀','주영숙'],['무대(미술)팀','윤성은'],['의상팀','김아미'],['소품팀','조정은'],['음향 및 조명','신광호'],['영상팀','류창훈'],['사진기록팀','권형준'],['운영위','정영화']];
+const staff=[['음악팀','박인선'],['안무팀','주영숙'],['무대(미술)팀','윤성은'],['의상팀','김아미'],['소품팀','조정은'],['음향 및 조명','신광호'],['영상팀','류창훈'],['사진기록팀','권형준'],['홍보팀','정영화']];
 const el=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n};
 function card([role,name]){const n=el('div','person');n.append(el('div','role',role),el('div','name',name));return n}
 groups.forEach(x=>document.getElementById('ensemble').append(card(x)));
