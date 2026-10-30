@@ -138,6 +138,9 @@ acceptButton.addEventListener('click',()=>{
     if(!celebrating){
       try{localStorage.setItem(acceptDateKey,seoulToday())}catch(e){}
       switchTab('cheer');
+    }else{
+      // 개막 축하 애니메이션 종료 후 공연 후기 탭으로 이동
+      switchTab('review');
     }
     welcomeStage.classList.remove('playing','open','celebrate');
     welcomeStage.setAttribute('aria-hidden','true');
