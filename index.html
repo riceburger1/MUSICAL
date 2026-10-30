@@ -8,13 +8,21 @@
 /* 초대 수락 연출 */
 .accept-area{text-align:center;max-width:570px;margin:22px auto 4px}.accept-button{width:100%;border:0;border-radius:15px;padding:17px 20px;background:linear-gradient(110deg,#76304d,#bf5370 48%,#9b355c);color:#fffaf0;font-weight:900;font-size:19px;box-shadow:0 8px 23px #9f41645c;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}.accept-button:before{content:'';position:absolute;inset:0;transform:translateX(-150%) skewX(-25deg);background:linear-gradient(90deg,transparent,#ffffff4d,transparent);animation:inviteShine 3.8s infinite}.accept-button:hover{transform:translateY(-2px);box-shadow:0 12px 30px #9f416477}.accept-button:focus-visible{outline:3px solid #d7a46a;outline-offset:4px}.accept-hint{font-size:12px;color:#837187;margin:10px 0 0}@keyframes inviteShine{0%,62%{transform:translateX(-150%) skewX(-25deg)}100%{transform:translateX(160%) skewX(-25deg)}}
 .stage-overlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 55%,#60304d 0%,#2a1026 45%,#120818 100%);display:grid;place-items:center;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;pointer-events:none}.stage-overlay.playing{opacity:1;visibility:visible;pointer-events:all}.stage-cross{position:absolute;width:14px;height:126px;left:calc(50% - 7px);top:24%;background:#f9deae;box-shadow:0 0 38px #ffc280,0 0 110px #ffce8f;opacity:0;transition:opacity .4s .6s}.stage-cross:after{content:'';position:absolute;left:-41px;top:30px;width:96px;height:13px;background:inherit;box-shadow:inherit}.stage-welcome{position:relative;z-index:3;max-width:90vw;text-align:center;color:#fff4df;padding:22px;opacity:0;transform:translateY(16px);transition:opacity .6s 1.05s,transform .6s 1.05s;text-shadow:0 4px 20px #0008}.stage-welcome .welcome-title{font-weight:900;font-size:clamp(23px,5.5vw,37px);line-height:1.5}.stage-welcome p{font-size:clamp(14px,3.4vw,19px);line-height:1.7}.curtain{position:absolute;z-index:4;top:0;bottom:0;width:51%;background:repeating-linear-gradient(90deg,#410711 0%,#791329 11%,#b33448 18%,#711026 30%,#3c0712 37%);box-shadow:inset 0 0 80px #150107;transition:transform 1.55s cubic-bezier(.58,.03,.25,1);will-change:transform}.curtain.left{left:0;border-right:3px solid #dd9c73}.curtain.right{right:0;border-left:3px solid #dd9c73}.stage-overlay.open .left{transform:translateX(-101%)}.stage-overlay.open .right{transform:translateX(101%)}.stage-overlay.open .stage-welcome,.stage-overlay.open .stage-cross{opacity:1;transform:translateY(0)}.stage-overlay:after{content:'';position:absolute;z-index:5;inset:0 0 auto;height:24px;background:linear-gradient(#8e233a,#3e0d1c);border-bottom:2px solid #dfaa70;pointer-events:none}.stage-overlay.open:after{opacity:0;transition:opacity .5s 1.3s}@media(prefers-reduced-motion:reduce){.accept-button:before{animation:none}.stage-overlay,.curtain,.stage-welcome,.stage-cross{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
+/* 초대장 D-DAY 및 개막 축하 */
+.invite-countdown{max-width:570px;margin:20px auto 0;text-align:center;border-radius:18px;padding:21px 14px;background:linear-gradient(135deg,#28133e,#602d66);color:#fff;box-shadow:0 9px 26px #29104626}
+.invite-countdown-title{font-weight:800;font-size:15px;color:#ffe3bb}.invite-countdown-value{font-size:clamp(23px,6vw,38px);font-weight:900;letter-spacing:.02em;margin:9px 0;color:#ffdcab;font-variant-numeric:tabular-nums}.invite-countdown-foot{font-size:12px;color:#e9d7ee}
+.celebration-pieces{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none}.confetti-piece{position:absolute;top:-12%;width:9px;height:17px;border-radius:2px;opacity:0;animation:fallConfetti 2.6s ease-in forwards;animation-delay:var(--delay);left:var(--left);background:var(--color);transform:rotate(var(--rotate))}
+.stage-overlay.celebrate.open .confetti-piece{opacity:1}@keyframes fallConfetti{0%{top:-12%;transform:translateX(0) rotate(0);opacity:0}8%{opacity:1}100%{top:112%;transform:translateX(var(--drift)) rotate(770deg);opacity:0}}
+.stage-overlay.celebrate .stage-cross{opacity:0!important}.stage-overlay.celebrate .stage-welcome .welcome-title{color:#ffe3a5;font-size:clamp(25px,7vw,45px)}
+@media(prefers-reduced-motion:reduce){.confetti-piece{animation:none!important;opacity:0!important}}
 </style></head><body><div class="shell"><header class="hero"><div class="eyebrow">26년 추수감사절</div><div class="sub">창작뮤지컬</div><h1>첫사랑</h1><p class="desc">예수님을 처음 만났던 그 순간, 그날을 기억하며…</p><div class="details"><span>2026. 11. 22. (일) 오후 2:30</span><span>양정중앙교회 본당</span></div></header><nav class="tabbar" aria-label="앱 메뉴"><button class="tab active" data-tab="invitation">초대장</button><button class="tab" data-tab="poster">포스터</button><button class="tab" data-tab="cast">출연진</button><button class="tab" data-tab="staff">스태프</button><button class="tab" data-tab="cheer">응원메시지</button><button class="tab" data-tab="review">후기</button></nav>
-<section class="panel active" id="invitation"><h2>공연 초대장</h2><p class="intro">하나님을 향한 첫사랑을 돌아보는 특별한 무대에 초대합니다.</p><img class="poster" src="invitation.jpg" alt="2026 추수감사절 창작뮤지컬 첫사랑 공연 초대장"><p class="poster-note">2026년 11월 22일 (일) 오후 2시 30분 · 양정중앙교회 본당</p><div class="accept-area"><button class="accept-button" id="accept-invitation" type="button">💌 초대 수락하기</button><p class="accept-hint">초대를 수락하면 특별한 무대가 열립니다.</p></div></section>
+<section class="panel active" id="invitation"><h2>공연 초대장</h2><p class="intro">하나님을 향한 첫사랑을 돌아보는 특별한 무대에 초대합니다.</p><img class="poster" src="invitation.jpg" alt="2026 추수감사절 창작뮤지컬 첫사랑 공연 초대장"><p class="poster-note">2026년 11월 22일 (일) 오후 2시 30분 · 양정중앙교회 본당</p><div id="invitation-dday" class="invite-countdown" role="timer" aria-label="공연 개막까지 남은 시간"><div class="invite-countdown-title">🎭 첫사랑 공연까지</div><div id="invite-countdown-value" class="invite-countdown-value">계산 중...</div><div class="invite-countdown-foot">2026. 11. 22. (일) 오후 2:30</div></div><div class="accept-area"><button class="accept-button" id="accept-invitation" type="button">💌 초대 수락하기</button><p class="accept-hint">초대를 수락하면 특별한 무대가 열립니다.</p></div></section>
 <section class="panel" id="poster"><h2>창작뮤지컬 《첫사랑》 공연 포스터</h2><p class="intro">예수님을 처음 만났던 그 순간, 그날을 기억하며…</p><img class="poster" src="musical-poster.jpg" alt="2026년 11월 22일 오후 2시 30분 양정중앙교회 본당, 창작뮤지컬 첫사랑 공연 포스터" loading="lazy"><p class="poster-note">2026년 11월 22일 (일) 오후 2시 30분 · 양정중앙교회 본당</p></section>
 <section class="panel" id="cast"><h2>출연진 리스트</h2><p class="intro">창작뮤지컬 《첫사랑》을 함께 만들어 가는 소중한 분들입니다. (직분 생략)</p><div class="section-head">총연출</div><div class="cast-grid"><div class="person full"><div class="role">총연출</div><div class="name">김인희</div></div></div><div class="section-head">주연 배우</div><img class="cast-poster" src="cast-poster.png" alt="주연 배우 4인 포스터: 박권사 오정화, 40대 남집사 안태현, 할머니 집사 이필수, 장로 김희철" loading="lazy"><div class="section-head">장면별 출연진</div><div class="cast-grid" id="ensemble"></div><div class="section-head">합창</div><div class="chorus">🎶 포도나무합창단 코러스</div></section>
 <section class="panel" id="staff"><h2>스태프 리스트</h2><p class="intro">무대 뒤에서 공연을 완성해 주시는 모든 분들께 감사드립니다. (직분 생략)</p><div id="staff-list"></div></section>
 <section class="panel" id="cheer"><h2>응원메시지</h2><p class="intro">공연을 준비하는 출연진과 스태프에게 따뜻한 응원의 마음을 전해주세요.</p><form class="message-form" data-kind="cheer"><div class="field"><label for="cheer-name">이름</label><input id="cheer-name" name="name" placeholder="이름을 입력하세요" maxlength="30" required></div><div class="field"><label for="cheer-text">응원메시지</label><textarea id="cheer-text" name="message" placeholder="첫사랑 공연을 응원하는 한마디를 남겨주세요!" maxlength="1000" required></textarea></div><button class="submit" type="submit">응원메시지 등록하기</button><p class="notice">게시한 이름과 메시지가 화면에 표시됩니다. 전화번호 등 개인정보는 작성하지 마세요.</p></form><div class="feed-head"><strong>함께하는 응원</strong><span class="count" id="cheer-count">0개</span></div><div id="cheer-feed"></div></section>
-<section class="panel review-locked" id="review"><h2>공연 후기</h2><div id="review-countdown" class="countdown-wrap" aria-live="off"><div class="countdown-icon">🎭</div><div class="countdown-kicker">창작뮤지컬 《첫사랑》</div><h3>공연 D-DAY 카운트다운</h3><p class="countdown-text">공연 후기는 공연시작 이후에 작성가능합니다<br>첫사랑의 감동을 함께 나눠주세요!</p><div class="countdown-grid" role="timer" aria-label="공연까지 남은 시간"><div class="countdown-unit"><span class="countdown-number" id="count-days">--</span><span class="countdown-label">일</span></div><div class="countdown-unit"><span class="countdown-number" id="count-hours">--</span><span class="countdown-label">시간</span></div><div class="countdown-unit"><span class="countdown-number" id="count-minutes">--</span><span class="countdown-label">분</span></div><div class="countdown-unit"><span class="countdown-number" id="count-seconds">--</span><span class="countdown-label">초</span></div></div><div class="countdown-date">2026년 11월 22일 (일) 오후 2시 30분 · 한국시간</div></div><div id="review-content" hidden><h2 class="sr-only" style="position:absolute;left:-9999px">후기 작성</h2><p class="intro">뮤지컬 《첫사랑》을 관람하신 소감과 감동의 순간을 나눠주세요.</p><form class="message-form" data-kind="review"><div class="field"><label for="review-name">이름</label><input id="review-name" name="name" placeholder="이름을 입력하세요" maxlength="30" required></div><div class="field"><label for="review-text">공연 후기</label><textarea id="review-text" name="message" placeholder="가장 기억에 남는 장면이나 감동을 남겨주세요!" maxlength="1000" required></textarea></div><button class="submit" type="submit">후기 등록하기</button><p class="notice">게시한 이름과 후기가 화면에 표시됩니다. 전화번호 등 개인정보는 작성하지 마세요.</p></form><div class="feed-head"><strong>관람 후기</strong><span class="count" id="review-count">0개</span></div><div id="review-feed"></div></div></section><div class="bottom">2026 양정중앙교회 · 창작뮤지컬 《첫사랑》</div></div><div class="toast" id="toast" role="status"></div><div class="stage-overlay" id="welcome-stage" role="dialog" aria-modal="true" aria-label="첫사랑 공연 초대 수락 환영" aria-hidden="true"><div class="stage-cross" aria-hidden="true"></div><div class="stage-welcome"><div class="welcome-title">초대를 수락해 주셔서 감사합니다!</div><p>여러분의 응원이 첫사랑의 무대를 완성합니다.</p></div><div class="curtain left" aria-hidden="true"></div><div class="curtain right" aria-hidden="true"></div></div>
+<section class="panel review-locked" id="review"><h2>공연 후기</h2><div id="review-countdown" class="countdown-wrap" aria-live="off"><div class="countdown-icon">🎭</div><div class="countdown-kicker">창작뮤지컬 《첫사랑》</div><h3>공연 D-DAY 카운트다운</h3><p class="countdown-text">공연 후기는 공연시작 이후에 작성가능합니다<br>첫사랑의 감동을 함께 나눠주세요!</p><div class="countdown-grid" role="timer" aria-label="공연까지 남은 시간"><div class="countdown-unit"><span class="countdown-number" id="count-days">--</span><span class="countdown-label">일</span></div><div class="countdown-unit"><span class="countdown-number" id="count-hours">--</span><span class="countdown-label">시간</span></div><div class="countdown-unit"><span class="countdown-number" id="count-minutes">--</span><span class="countdown-label">분</span></div><div class="countdown-unit"><span class="countdown-number" id="count-seconds">--</span><span class="countdown-label">초</span></div></div><div class="countdown-date">2026년 11월 22일 (일) 오후 2시 30분 · 한국시간</div></div><div id="review-content" hidden><h2 class="sr-only" style="position:absolute;left:-9999px">후기 작성</h2><p class="intro">뮤지컬 《첫사랑》을 관람하신 소감과 감동의 순간을 나눠주세요.</p><form class="message-form" data-kind="review"><div class="field"><label for="review-name">이름</label><input id="review-name" name="name" placeholder="이름을 입력하세요" maxlength="30" required></div><div class="field"><label for="review-text">공연 후기</label><textarea id="review-text" name="message" placeholder="가장 기억에 남는 장면이나 감동을 남겨주세요!" maxlength="1000" required></textarea></div><button class="submit" type="submit">후기 등록하기</button><p class="notice">게시한 이름과 후기가 화면에 표시됩니다. 전화번호 등 개인정보는 작성하지 마세요.</p></form><div class="feed-head"><strong>관람 후기</strong><span class="count" id="review-count">0개</span></div><div id="review-feed"></div></div></section><div class="bottom">2026 양정중앙교회 · 창작뮤지컬 《첫사랑》</div></div><div class="toast" id="toast" role="status"></div><div class="stage-overlay" id="welcome-stage" role="dialog" aria-modal="true" aria-label="첫사랑 공연 초대 수락 환영" aria-hidden="true"><div class="stage-cross" aria-hidden="true"></div><div class="stage-welcome"><div class="welcome-title" id="stage-title">초대를 수락해 주셔서 감사합니다!</div><p id="stage-message">여러분의 응원이 첫사랑의 무대를 완성합니다.</p></div><div class="celebration-pieces" id="celebration-pieces" aria-hidden="true"></div><div class="curtain left" aria-hidden="true"></div><div class="curtain right" aria-hidden="true"></div></div>
 <script>
 // 온라인으로 모든 방문자의 메시지를 공유하려면 아래 두 값을 설정하세요.
 const SUPABASE_URL = '';
@@ -62,35 +70,82 @@ function seoulToday(){
 function acceptedToday(){
   try{return localStorage.getItem(acceptDateKey)===seoulToday()}catch(e){return false}
 }
+const invitationCountdown=document.getElementById('invitation-dday');
+const invitationCountdownValue=document.getElementById('invite-countdown-value');
+const stageTitle=document.getElementById('stage-title');
+const stageMessage=document.getElementById('stage-message');
+const celebrationPieces=document.getElementById('celebration-pieces');
+// 공연 당일 00:00(한국시간)부터 카운트다운을 숨기고 개막 축하 모드로 전환합니다.
+const OPENING_DAY='2026-11-22';
+function openingDayOrLater(){return seoulToday()>=OPENING_DAY}
+function updateInvitationCountdown(){
+  if(openingDayOrLater()){
+    invitationCountdown.hidden=true;
+    invitationCountdown.style.display='none';
+    return;
+  }
+  invitationCountdown.hidden=false;
+  invitationCountdown.style.display='';
+  const seconds=Math.max(0,Math.floor((REVIEW_OPEN_AT-Date.now())/1000));
+  const d=Math.floor(seconds/86400),h=Math.floor(seconds%86400/3600),m=Math.floor(seconds%3600/60),sec=seconds%60;
+  invitationCountdownValue.textContent=`D-${d}  ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
 function updateAcceptButton(){
+  updateInvitationCountdown();
+  if(openingDayOrLater()){
+    acceptButton.textContent='🎉 첫사랑 개막 축하하기';
+    acceptButton.nextElementSibling.textContent='버튼을 누르면 화려한 개막 축하 무대가 펼쳐집니다!';
+    return;
+  }
   const accepted=acceptedToday();
   acceptButton.textContent=accepted?'💜 응원메시지 남기기':'💌 초대 수락하기';
   acceptButton.nextElementSibling.textContent=accepted?'오늘도 초대를 수락해 주셔서 감사합니다. 내일 다시 무대가 열립니다.':'초대를 수락하면 특별한 무대가 열립니다.';
 }
+function buildConfetti(){
+  celebrationPieces.replaceChildren();
+  const colors=['#ffce74','#f09cbf','#fff4c5','#b9a2ff','#85e6dc','#ffffff'];
+  for(let i=0;i<62;i++){
+    const piece=document.createElement('i');piece.className='confetti-piece';
+    piece.style.setProperty('--left',`${(i*47.7)%100}%`);
+    piece.style.setProperty('--delay',`${(i*0.07)%1.2}s`);
+    piece.style.setProperty('--color',colors[i%colors.length]);
+    piece.style.setProperty('--drift',`${(i%7-3)*19}px`);
+    piece.style.setProperty('--rotate',`${i*27}deg`);
+    celebrationPieces.append(piece);
+  }
+}
 updateAcceptButton();
-// 탭을 바꾸거나 앱으로 돌아오면 날짜 변경 여부를 다시 확인합니다.
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateAcceptButton()});
 window.addEventListener('focus',updateAcceptButton);
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',updateAcceptButton));
+setInterval(updateAcceptButton,1000);
 acceptButton.addEventListener('click',()=>{
   if(welcomeRunning)return;
   updateAcceptButton();
-  if(acceptedToday()){switchTab('cheer');return}
+  const celebrating=openingDayOrLater();
+  if(!celebrating && acceptedToday()){switchTab('cheer');return}
   welcomeRunning=true;
+  welcomeStage.classList.toggle('celebrate',celebrating);
+  stageTitle.textContent=celebrating?'첫사랑 뮤지컬 개막을 축하합니다!':'초대를 수락해 주셔서 감사합니다!';
+  stageMessage.textContent=celebrating?'오늘의 무대에 사랑과 감동이 가득하기를 바랍니다!':'여러분의 응원이 첫사랑의 무대를 완성합니다.';
+  if(celebrating)buildConfetti();else celebrationPieces.replaceChildren();
   welcomeStage.classList.add('playing');
   welcomeStage.setAttribute('aria-hidden','false');
   acceptButton.disabled=true;
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   requestAnimationFrame(()=>requestAnimationFrame(()=>welcomeStage.classList.add('open')));
   window.setTimeout(()=>{
-    try{localStorage.setItem(acceptDateKey,seoulToday())}catch(e){}
-    updateAcceptButton();
-    switchTab('cheer');
-    welcomeStage.classList.remove('playing','open');
+    if(!celebrating){
+      try{localStorage.setItem(acceptDateKey,seoulToday())}catch(e){}
+      switchTab('cheer');
+    }
+    welcomeStage.classList.remove('playing','open','celebrate');
     welcomeStage.setAttribute('aria-hidden','true');
+    celebrationPieces.replaceChildren();
     acceptButton.disabled=false;
     welcomeRunning=false;
-  },reduced?900:2850);
+    updateAcceptButton();
+  },reduced?1100:celebrating?4100:2850);
 });
 
 function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display='none',2800)}
