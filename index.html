@@ -50,21 +50,32 @@ groups.forEach(x=>document.getElementById('ensemble').append(card(x)));
 staff.forEach(([role,name],i)=>{const n=el('div','staff');n.append(el('span','num',String(i+1).padStart(2,'0')),el('span','group',role),el('span','staffname',name));document.getElementById('staff-list').append(n)});
 function switchTab(id){if(id==='review')updateReviewCountdown();document.querySelectorAll('.tab').forEach(n=>{n.classList.toggle('active',n.dataset.tab===id);n.setAttribute('aria-selected',n.dataset.tab===id?'true':'false')});document.querySelectorAll('.panel').forEach(n=>n.classList.toggle('active',n.id===id));window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
-// 초대장 수락 -> 무대 커튼 오픈 -> 응원메시지 탭 자동 이동.
+// 초대장 수락 -> 커튼 열림 -> 응원 탭. 한국시간 자정에 날짜별 수락 기록 초기화.
 const acceptButton=document.getElementById('accept-invitation');
 const welcomeStage=document.getElementById('welcome-stage');
+const acceptDateKey='firstlove-invitation-accepted-date';
 let welcomeRunning=false;
+function seoulToday(){
+  // 브라우저가 다른 시간대여도 공연의 한국 날짜를 기준으로 하루를 구분합니다.
+  return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+}
+function acceptedToday(){
+  try{return localStorage.getItem(acceptDateKey)===seoulToday()}catch(e){return false}
+}
 function updateAcceptButton(){
-  let accepted=false;
-  try{accepted=localStorage.getItem('firstlove-invitation-accepted')==='1'}catch(e){}
-  if(accepted){acceptButton.textContent='💜 응원메시지 남기기';acceptButton.nextElementSibling.textContent='초대를 수락해 주셔서 감사합니다.'}
+  const accepted=acceptedToday();
+  acceptButton.textContent=accepted?'💜 응원메시지 남기기':'💌 초대 수락하기';
+  acceptButton.nextElementSibling.textContent=accepted?'오늘도 초대를 수락해 주셔서 감사합니다. 내일 다시 무대가 열립니다.':'초대를 수락하면 특별한 무대가 열립니다.';
 }
 updateAcceptButton();
+// 탭을 바꾸거나 앱으로 돌아오면 날짜 변경 여부를 다시 확인합니다.
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateAcceptButton()});
+window.addEventListener('focus',updateAcceptButton);
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',updateAcceptButton));
 acceptButton.addEventListener('click',()=>{
   if(welcomeRunning)return;
-  let accepted=false;
-  try{accepted=localStorage.getItem('firstlove-invitation-accepted')==='1'}catch(e){}
-  if(accepted){switchTab('cheer');return}
+  updateAcceptButton();
+  if(acceptedToday()){switchTab('cheer');return}
   welcomeRunning=true;
   welcomeStage.classList.add('playing');
   welcomeStage.setAttribute('aria-hidden','false');
@@ -72,7 +83,7 @@ acceptButton.addEventListener('click',()=>{
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   requestAnimationFrame(()=>requestAnimationFrame(()=>welcomeStage.classList.add('open')));
   window.setTimeout(()=>{
-    try{localStorage.setItem('firstlove-invitation-accepted','1')}catch(e){}
+    try{localStorage.setItem(acceptDateKey,seoulToday())}catch(e){}
     updateAcceptButton();
     switchTab('cheer');
     welcomeStage.classList.remove('playing','open');
