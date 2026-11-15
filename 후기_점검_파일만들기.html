@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>첫사랑 후기 등록 점검 파일 만들기</title>
+<style>body{font-family:system-ui,'Malgun Gothic',sans-serif;background:#f7f2f8;color:#271832;max-width:700px;margin:35px auto;padding:20px;line-height:1.65}main{background:white;padding:28px;border-radius:20px;box-shadow:0 8px 25px #37274a19}h1{font-size:25px;color:#51306d}button{border:0;border-radius:11px;padding:15px 22px;background:#653581;color:white;font-size:16px;font-weight:700;cursor:pointer}input{width:100%;margin:12px 0 20px}p.note{background:#ffefdf;padding:12px;border-radius:10px;font-size:14px}#status{white-space:pre-wrap;color:#51405c}</style></head>
+<body><main><h1>첫사랑 후기 등록 점검용 파일 만들기</h1>
+<p>원본 첫사랑 앱의 <code>index.html</code>을 선택한 뒤 아래 버튼을 누르면, 후기 개방 시간을 <b>2026년 11월 16일 오전 9시(한국시간)</b>로 변경한 <code>index.html</code>이 내려받아집니다.</p>
+<label for="source">현재 GitHub에 올라가 있는 <b>index.html</b> 선택</label><input id="source" type="file" accept=".html,text/html">
+<button id="make">수정된 index.html 만들기</button><p id="status" role="status"></p>
+<p class="note">공연 포스터·초대장 날짜와 11월 22일 개막 축하 효과는 그대로 유지됩니다. <b>Supabase의 별도 SQL도 실행</b>해야 후기 등록 테스트가 정상적으로 됩니다.</p></main>
+<script>
+const openAt='2026-11-16T09:00:00+09:00';
+function patch(text){
+ const exact="const REVIEW_OPEN_AT = Date.parse('2026-11-22T14:30:00+09:00');";
+ if(!text.includes(exact))throw Error('원본 파일에서 후기 공개 시각을 찾지 못했습니다. GitHub의 최신 index.html을 선택했는지 확인하세요.');
+ text=text.replace(exact,`const REVIEW_OPEN_AT = Date.parse('${openAt}');\nconst PERFORMANCE_START_AT = Date.parse('2026-11-22T14:30:00+09:00');`);
+ // 초대장의 공연 D-DAY는 기존 공연 날짜를 기준으로 유지
+ const inviteStart=text.indexOf('function updateInvitationCountdown(){');
+ if(inviteStart<0)throw Error('초대장 카운트다운 코드를 찾지 못했습니다.');
+ const inviteEnd=text.indexOf('function updateAcceptButton()',inviteStart);
+ if(inviteEnd<0)throw Error('초대장 카운트다운 코드 경계를 찾지 못했습니다.');
+ let invite=text.slice(inviteStart,inviteEnd);
+ if(!invite.includes('REVIEW_OPEN_AT'))throw Error('초대장 카운트다운 내부 시각 참조를 찾지 못했습니다.');
+ invite=invite.replace(/REVIEW_OPEN_AT/g,'PERFORMANCE_START_AT');
+ text=text.slice(0,inviteStart)+invite+text.slice(inviteEnd);
+ text=text.replace('<h3>공연 D-DAY 카운트다운</h3>','<h3>후기 등록 최종점검 카운트다운</h3>');
+ text=text.replace('공연 후기는 공연시작 이후에 작성가능합니다<br>첫사랑의 감동을 함께 나눠주세요!','후기 등록 최종점검을 위해 11월 16일 오전 9시에 임시 개방됩니다.<br>실제 공연은 11월 22일 오후 2시 30분입니다.');
+ text=text.replace('<div class="countdown-date">2026년 11월 22일 (일) 오후 2시 30분 · 한국시간</div>','<div class="countdown-date">2026년 11월 16일 (월) 오전 9시 · 한국시간 (임시 점검)</div>');
+ return text;
+}
+document.getElementById('make').onclick=async()=>{
+ const msg=document.getElementById('status');
+ const file=document.getElementById('source').files[0];
+ if(!file){msg.textContent='index.html 파일을 먼저 선택해 주세요.';return;}
+ try{
+  const source=await file.text(); const output=patch(source);
+  const u=URL.createObjectURL(new Blob([output],{type:'text/html;charset=utf-8'}));
+  const a=document.createElement('a');a.href=u;a.download='index.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);
+  msg.textContent='완료! 다운로드된 index.html을 GitHub MUSICAL 저장소의 기존 index.html에 덮어써 주세요.';
+ }catch(e){msg.textContent='오류: '+e.message;}
+};
+</script></body></html>
